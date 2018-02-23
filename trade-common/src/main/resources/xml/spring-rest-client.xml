@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="userClient" class="com.liuk.trade.common.client.RestClientProxyFactoryBeanSpring">
+        <property name="serviceInterface" value="com.liuk.trade.common.api.IUserApi"/>
+        <property name="serverEnum" value="USER"/>
+    </bean>
+    <bean id="orderClient" class="com.liuk.trade.common.client.RestClientProxyFactoryBeanSpring">
+        <property name="serviceInterface" value="com.liuk.trade.common.api.IOrderApi"/>
+        <property name="serverEnum" value="ORDER"/>
+    </bean>
+    <bean id="payClient" class="com.liuk.trade.common.client.RestClientProxyFactoryBeanSpring">
+        <property name="serviceInterface" value="com.liuk.trade.common.api.IPayApi"/>
+        <property name="serverEnum" value="PAY"/>
+    </bean>
+    <bean id="couponClient" class="com.liuk.trade.common.client.RestClientProxyFactoryBeanSpring">
+        <property name="serviceInterface" value="com.liuk.trade.common.api.ICouponApi"/>
+        <property name="serverEnum" value="COUPON"/>
+    </bean>
+    <bean id="goodsClient" class="com.liuk.trade.common.client.RestClientProxyFactoryBeanSpring">
+        <property name="serviceInterface" value="com.liuk.trade.common.api.IGoodsApi"/>
+        <property name="serverEnum" value="GOODS"/>
+    </bean>
+
+</beans>
