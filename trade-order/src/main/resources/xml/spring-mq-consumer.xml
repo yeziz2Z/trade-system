@@ -6,12 +6,20 @@
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
        ">
     <bean id="cancelOrderProcessor" class="com.liuk.trade.order.mq.processor.CancelOrderProcessor"/>
+    <bean id="paidProcessor" class="com.liuk.trade.order.mq.processor.PaidProcessor"/>
     <bean id="orderConsumer" class="com.liuk.trade.common.rocketmq.LiukMQConsumer" init-method="init">
         <property name="groupName" value="order_orderTopic_cancel_group"/>
         <property name="namesrvAddr" value="192.168.160.131:9876"/>
         <property name="tag" value="cancel"/>
         <property name="topic" value="orderTopic"/>
         <property name="processor" ref="cancelOrderProcessor"/>
+    </bean>
+    <bean id="paidConsumer" class="com.liuk.trade.common.rocketmq.LiukMQConsumer" init-method="init">
+        <property name="groupName" value="paid_orderTopic_cancel_group"/>
+        <property name="namesrvAddr" value="192.168.160.131:9876"/>
+        <property name="tag" value="paid"/>
+        <property name="topic" value="payTopic"/>
+        <property name="processor" ref="paidProcessor"/>
     </bean>
 
 </beans>

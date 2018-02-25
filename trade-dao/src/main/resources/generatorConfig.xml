@@ -78,7 +78,8 @@
         <table tableName="trade_order" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true" enableUpdateByExample="true"/>
         <table tableName="trade_pay" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true" enableUpdateByExample="true"/>
         -->
-        <table tableName="trade_mq_consumer_log" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true" enableUpdateByExample="true"/>
+        <!--<table tableName="trade_mq_consumer_log" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true" enableUpdateByExample="true"/>-->
+        <table tableName="trade_mq_producer_temp" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true" enableUpdateByExample="true"/>
 
 
     </context>

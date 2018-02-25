@@ -235,7 +235,7 @@
 
   </update>
   <update id="unUseCoupon" parameterType="com.liuk.trade.entity.TradeCoupon">
-    UPDATE trade_coupon SET is_used = '0'
+    UPDATE trade_coupon SET is_used = '0',
             order_id = NULL ,
             used_time = NULL
       WHERE coupon_id = #{couponId,jdbcType=VARCHAR}

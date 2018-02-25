@@ -106,6 +106,6 @@ public class UserServiceImpl implements IUserService {
         }
         tradeUserMoneyLogMapper.insert(tradeUserMoneyLog);
 
-        return null;
+        return changeUserMoneyRes;
     }
 }

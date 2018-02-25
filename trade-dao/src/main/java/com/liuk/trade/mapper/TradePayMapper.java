@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface TradePayMapper {
-    long countByExample(TradePayExample example);
+    int countByExample(TradePayExample example);
 
     int deleteByExample(TradePayExample example);
 

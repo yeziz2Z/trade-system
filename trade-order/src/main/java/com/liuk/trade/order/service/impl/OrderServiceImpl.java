@@ -67,6 +67,8 @@ public class OrderServiceImpl implements IOrderService{
             //2.创建不可见订单
             String orderId = saveNoConfirmOrder(confirmOrderReq);
             //3.调用远程服务，扣优惠券、扣库存、扣余额，如果调用成功 ->更改订单状态可见  失败->发送MQ消息 ，进行取消订单
+            callRemoteService(orderId,confirmOrderReq);
+            confirmOrderRes.setOrderId(orderId);
         } catch (Exception e) {
             confirmOrderRes.setRetCode(TradeEnums.ResEnum.FAIL.getCode());
             confirmOrderRes.setRetInfo(e.getMessage());
@@ -92,6 +94,7 @@ public class OrderServiceImpl implements IOrderService{
                 ChangeUserMoneyReq changeUserMoneyReq = new ChangeUserMoneyReq();
                 changeUserMoneyReq.setOrderId(orderId);
                 changeUserMoneyReq.setUserId(confirmOrderReq.getUserId());
+                changeUserMoneyReq.setUserMoney(confirmOrderReq.getMoneyPaid());
                 changeUserMoneyReq.setMoneyLogType(TradeEnums.UserMoneyLogTypeEnum.PAID.getCode());
                 ChangeUserMoneyRes changeUserMoneyRes = userApi.changeUserMoney(changeUserMoneyReq);
                 if (!changeUserMoneyRes.getRetCode().equals(TradeEnums.ResEnum.SUCCESS.getCode())){
@@ -107,12 +110,15 @@ public class OrderServiceImpl implements IOrderService{
             if(!reduceGoodsNumberRes.getRetCode().equals(TradeEnums.ResEnum.SUCCESS.getCode())){
                 throw new Exception("扣库存失败");
             }
+            /*if(1 == 1){
+                throw new Exception("手动异常，emnmnmn。。。");
+            }*/
             //更改订单状态
             TradeOrder tradeOrder = new TradeOrder();
             tradeOrder.setOrderId(orderId);
             tradeOrder.setOrderStatus(TradeEnums.OrderStatusEnum.CONFIRM.getStatusCode());
             tradeOrder.setConfirmTime(new Date());
-            int ret = tradeOrderMapper.updateByPrimaryKey(tradeOrder);
+            int ret = tradeOrderMapper.updateByPrimaryKeySelective(tradeOrder);
             if (ret <= 0){
                 throw new Exception("修改订单状态失败");
             }
@@ -130,6 +136,7 @@ public class OrderServiceImpl implements IOrderService{
                 System.out.println(sendResult);
             } catch (LiukMQException e1) {
             }
+            throw new RuntimeException(e.getMessage());
         }
     }
     private String saveNoConfirmOrder(ConfirmOrderReq confirmOrderReq) throws Exception{

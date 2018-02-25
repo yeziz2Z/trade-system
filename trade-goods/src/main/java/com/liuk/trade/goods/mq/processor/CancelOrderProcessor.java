@@ -26,6 +26,7 @@ public class CancelOrderProcessor implements IMessageProcessor {
     private IGoodsService goodsService;
     @Autowired
     private TradeMqConsumerLogMapper tradeMqConsumerLogMapper;
+
     public boolean handleMessage(MessageExt messageExt) {
         TradeMqConsumerLog mqConsumerLog = null;
         try {

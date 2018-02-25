@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.rocketmq.common.message.MessageExt;
 import com.liuk.trade.common.constants.TradeEnums;
 import com.liuk.trade.common.protocol.coupon.ChangeCouponStatusReq;
+import com.liuk.trade.common.protocol.coupon.ChangeCouponStatusRes;
 import com.liuk.trade.common.protocol.mq.CancelOrderMQ;
 import com.liuk.trade.common.rocketmq.IMessageProcessor;
 import com.liuk.trade.coupon.service.ICouponService;
@@ -36,7 +37,8 @@ public class CancelOrderProcessor implements IMessageProcessor {
                 changeCouponStatusReq.setCouponId(cancelOrderMQ.getCouponId());
                 changeCouponStatusReq.setOrderId(cancelOrderMQ.getOrderId());
                 changeCouponStatusReq.setIsUsed(TradeEnums.YesNoEnum.NO.getCode());
-                couponService.changeCouponStatus(changeCouponStatusReq);
+                ChangeCouponStatusRes changeCouponStatusRes = couponService.changeCouponStatus(changeCouponStatusReq);
+                System.out.println("优惠券Mq回滚："+JSON.toJSONString(changeCouponStatusRes));
             }
             return true;
         } catch (Exception e) {

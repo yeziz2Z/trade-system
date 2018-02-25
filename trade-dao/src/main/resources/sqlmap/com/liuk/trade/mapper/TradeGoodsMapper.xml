@@ -232,7 +232,7 @@
   </update>
   <update id="addTradeGoodsNumber" parameterType="com.liuk.trade.entity.TradeGoods">
     update trade_goods
-    set goods_number = goods_number + #{goodsNumber,jdbcType=INTEGER},
+    set goods_number = goods_number + #{goodsNumber,jdbcType=INTEGER}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
 </mapper>

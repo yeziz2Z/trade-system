@@ -57,6 +57,7 @@ public class LiukMQConsumer {
     }
 
     public void init() throws LiukMQException {
+        System.out.println(groupName);
         if(StringUtils.isBlank(this.groupName)){
             throw new LiukMQException("groupName is blank!");
         }

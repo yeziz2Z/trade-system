@@ -55,7 +55,7 @@ public class CouponServiceImpl implements ICouponService {
             }
             //使用优惠券
             TradeCoupon tradeCoupon = new TradeCoupon();
-            tradeCoupon.setCouponId(changeCouponStatusReq.getOrderId());
+            tradeCoupon.setCouponId(changeCouponStatusReq.getCouponId());
             tradeCoupon.setOrderId(changeCouponStatusReq.getOrderId());
             if(changeCouponStatusReq.getIsUsed().equals(TradeEnums.YesNoEnum.YES.getCode())){
                 int i = tradeCouponMapper.useCoupon(tradeCoupon);
@@ -63,7 +63,7 @@ public class CouponServiceImpl implements ICouponService {
                     throw new Exception("使用优惠券失败！");
                 }
             }else if(changeCouponStatusReq.getIsUsed().equals(TradeEnums.YesNoEnum.NO.getCode())){
-                tradeCouponMapper.useCoupon(tradeCoupon);
+                tradeCouponMapper.unUseCoupon(tradeCoupon);
             }
         }catch (Exception e){
             changeCouponStatusRes.setRetCode(TradeEnums.ResEnum.FAIL.getCode());
