@@ -21,7 +21,7 @@
 
     <properties>
         <rocketmq.version>3.2.6</rocketmq.version>
-        <spring.version>3.2.17.RELEASE</spring.version>
+        <spring.version>5.3.18</spring.version>
     </properties>
 
     <dependencies>
